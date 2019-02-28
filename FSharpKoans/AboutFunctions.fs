@@ -18,29 +18,29 @@ open NUnit.Framework
 module ``03: Putting the Function into Functional Programming`` = 
     [<Test>]
     let ``01 A function takes one input and produces one output`` () =
-        (fun a -> a + 100) __ |> should equal 2097
+        (fun a -> a + 100) 1997 |> should equal 2097
 
     [<Test>]
     let ``02 The input to a function is a pattern (Part 1).`` () =
-        (fun 7 -> 9) __ |> should equal 9
+        (fun 7 -> 9) 7 |> should equal 9
 
     [<Test>]
     let ``03 The input to a function is a pattern (Part 2).`` () =
-        (fun _ -> 75) __ |> should equal 75
+        (fun 5 -> 75) 5 |> should equal 75
 
     [<Test>]
     let ``04 The input to a function is a pattern (Part 3).`` () =
-        (fun (2 | 3 | 5) -> "Prime") __ |> should equal "Prime"
+        (fun (2 | 3 | 5) -> "Prime") 2 |> should equal "Prime"
 
     [<Test>]
     let ``05 A function can be bound to a name (Part 1).`` () =
         let one_third = fun ka -> ka / 3
-        __ 21 |> should equal 7
+        (one_third 21) |> should equal 7
 
     [<Test>]
     let ``06 A function can be bound to a name (Part 2).`` () =
         let pinky bleh = bleh / 3 // The syntax has changed from Part 1, but the meaning is the same
-        __ 21 |> should equal 7
+        pinky 21 |> should equal 7
 
     [<Test>]
     let ``07 A function can span multiple lines (Part 1).`` () =
