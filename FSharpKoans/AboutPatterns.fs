@@ -22,9 +22,7 @@ module ``09: Advanced pattern-matching`` =
             | "wut" | "lol" -> "yolo"
             | "sunrise"
             | "sunset" -> "transition"
-            | FILL__ME_IN
-            | FILL__ME_IN
-            | FILL__ME_IN -> "failure"
+            | "Bell's" | "Johnny Walker"| "vodka" -> "failure"
             | _ -> "lolwut"
         f "lol" |> should equal "yolo"
         f "wut" |> should equal "yolo"
@@ -35,9 +33,11 @@ module ``09: Advanced pattern-matching`` =
     [<Test>]
     let ``02 Identifiers bound on all branches of an OR-pattern must be the same`` () =
         let f input =
+            let (a,b) = input
             match input with
             | 0,0 -> "Both 0"
-            | ___ | ___ -> sprintf "One 0, one %d" __
+            | _,0  -> sprintf "One 0, one %d" a
+            | 0,_ -> sprintf "One 0, one %d" b
             | _ -> "No 0"
         f (3,0) |> should equal "One 0, one 3"
         f (0, 4) |> should equal "One 0, one 4"
