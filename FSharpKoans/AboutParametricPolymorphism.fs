@@ -93,17 +93,18 @@ module ``10: Parametric polymorphism`` =
     }
     // we might create this with: { Something=5; Blah=8; Otherwise=9.3; What=77,"hi",0.88 }
 
-    type MyRecord = {
-        Who : FILL_ME_IN // <-- should be generic
-        What : FILL_ME_IN // <-- should be generic, and a different type to Who
+    type MyRecord<'a,'b> = {
+        Who : 'b // <-- should be generic
+        What : 'a // <-- should be generic, and a different type to Who
         Where : string
     }
 
     [<Test>]
     let ``04 Creating a generic record`` () =
         // You need to edit the definition of MyRecord first!  It's just above this test.
-        let a = __
-        let b = __  
+        let a = {MyRecord.Who = "The Doctor"; MyRecord.What = 4.53; MyRecord.Where = "TTFN"}
+
+        let b = {MyRecord.Who = 'R'; MyRecord.What = false; MyRecord.Where = "tiffin"}
         a.Who |> should equal "The Doctor"
         b.Who |> should equal 'R'
         a.What |> should equal 4.53
@@ -121,8 +122,8 @@ module ``10: Parametric polymorphism`` =
         let a = Secnod (6.55, 7)
         let b = Thrid (fun k -> true, k, 8)
         // how do you write a generic type?
-        a |> should be ofType<FILL_ME_IN>
-        b |> should be ofType<FILL_ME_IN>
+        a |> should be ofType<GenericDiscriminatedUnionExample<float,int>>
+        b |> should be ofType<GenericDiscriminatedUnionExample<'a, bool>>
 
     type MyDiscriminatedUnion =
     | Furoth of FILL_ME_IN
